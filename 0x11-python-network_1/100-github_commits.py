@@ -1,14 +1,21 @@
 #!/usr/bin/python3
-"""
-list 10 commits (from the most recent to oldest) of the repository and user
-sent in as arguments
-"""
+"""Time for an interview!"""
+
 if __name__ == '__main__':
     import requests
-    from sys import argv
-    r = requests.get('https://api.github.com/repos/{}/{}/commits'
-                     .format(argv[2], argv[1]))
-    commits = r.json()
-    for commit in commits[:10]:
-        print(commit.get('sha'), end=': ')
-        print(commit.get('commit').get('author').get('name'))
+    import sys
+
+
+    headers = {
+        'Accept': 'application/vnd.github.v3+json',
+    }
+    params = {
+        'per_page': 10,
+    }
+
+    res = requests.get('https://api.github.com/repos/{}/{}/commits'.format(
+        sys.argv[2], sys.argv[1]),
+                       headers=headers, params=params)
+    jr = res.json()
+    for c in jr:
+        print(c['sha'] + ':', c['commit']['author']['name'])

@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-# 100-my_int.py
-"""Defines a class MyInt that inherits from int."""
-
-
+"""class MyInt"""
 class MyInt(int):
-    """Invert int operators == and !=."""
+    """A class that inherits from int"""
 
     def __eq__(self, value):
-        """Override == opeartor with != behavior."""
+        """Not equating the operator"""
         return self.real != value
-
+    
     def __ne__(self, value):
-        """Override != operator with == behavior."""
+        """Equating the operator"""
         return self.real == value
