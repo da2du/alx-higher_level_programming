@@ -1,15 +1,18 @@
 #!/usr/bin/python3
-'''task 14 model script'''
-
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String, Integer, ForeignKey
+""" Define State model """
+from model_state import Base
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, Integer, ForeignKey
 
 
 class City(Base):
-    '''Class city model'''
+    """ Define a class State to be linked to db table """
     __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, unique=True, nullable=False,
-                autoincrement=True)
+
+    id = Column(Integer, nullable=False,
+                autoincrement=True, unique=True,
+                primary_key=True)
+
     name = Column(String(128), nullable=False)
+
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)

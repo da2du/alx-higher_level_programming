@@ -1,17 +1,14 @@
 #!/usr/bin/python3
-
-
 def roman_to_int(roman_string):
-    num_map = {'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
-    i = 0
-    count = 0
-    if isinstance(roman_string, str):
-        for i in range(len(roman_string) - 1):
-            if num_map[roman_string[i]] >= num_map[roman_string[i + 1]]:
-                count += num_map[roman_string[i]]
+    val = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    res = 0
+    p = 0
+
+    if type(roman_string) is str and roman_string:
+        for c in range(len(roman_string) - 1, -1, -1):
+            if val[roman_string[c]] >= p:
+                res += val[roman_string[c]]
             else:
-                count -= num_map[roman_string[i]]
-            i += 1
-        count += num_map[roman_string[i]]
-        return count
-    return 0
+                res -= val[roman_string[c]]
+            p = val[roman_string[c]]
+    return res

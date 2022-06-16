@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-"""POST an email"""
-
+"""
+takes in a URL and an email, sends a POST request to the passed URL with the
+email as a parameter, and displays the body of the response
+"""
 if __name__ == "__main__":
-    import sys
-    import urllib.request
-    import urllib.parse
-    d = urllib.parse.urlencode({'email': sys.argv[2]}).encode('ascii')
-    with urllib.request.urlopen(url=sys.argv[1], data=d) as response:
-        print(response.read().decode('UTF-8'))
+    import urllib.parse as parse
+    import urllib.request as request
+    from sys import argv
+    values = {'email': argv[2]}
+    data = parse.urlencode(values).encode('utf-8')
+    req = request.Request(argv[1], data)
+    with request.urlopen(req) as r:
+        print(r.read().decode('utf-8'))

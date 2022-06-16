@@ -1,13 +1,10 @@
 #!/usr/bin/node
-
-const Firstsq = require('./5-square');
-
-class Square extends Firstsq {
-  charPrint (char) {
-    const c = char || 'X';
-    let a = c.repeat(this.width) + '\n';
-    a = a.repeat(this.height);
-    console.log(a.slice(0, -1));
+module.exports = class Square extends require('./5-square.js') {
+  charPrint (c) {
+    if (c === undefined) {
+      this.print();
+    } else {
+      for (let i = 0; i < this.height; i++) console.log(c.repeat(this.width));
+    }
   }
-}
-module.exports = Square;
+};

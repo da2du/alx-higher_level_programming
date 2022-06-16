@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-"""
-an empty class that defines Rectangle
-"""
+"""""This module create a rectangle"""
+
+
 class Rectangle:
-    """Empty Rectangle"""
-    pass
+    """
+    pass atribute - empty class
+    """
+    def __init__(self):
+        pass

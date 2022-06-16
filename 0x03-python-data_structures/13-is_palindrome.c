@@ -1,43 +1,35 @@
-#include "lists.h"
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdio.h>
+#include "lists.h"
+
 /**
- * is_palindrome - check if a linked list is palindrome or not
- * @head: pointer to head of list
- * Return: 0 if it is not a palindrome, 1 if it is a palindrome
+ * is_palindrome - check if a linked list is a palindrome
+ *
+ * @head: first node
+ *
+ * Return: 1 if success
+ *         0 if failed
  */
 int is_palindrome(listint_t **head)
 {
+  listint_t *tmp = *head;
+  int values[2048], i = 0, cLoop, limit;
 
-listint_t *temp2;
-int arr[9999], i = 0, count = 0, j;
-if ((!*head) || (!head))
-{
-return (1);
-}
-temp2 = *head;
-if (!temp2->next)
-{
-return (1);
-}
+  if (head == NULL || *head == NULL)
+    return (1);
 
-while (temp2->next != NULL)
-{
-arr[i] = temp2->n;
-temp2 = temp2->next;
-i++;
-count++;
-}
-arr[i] = temp2->n;
-count++;
-j = count - 1;
-for (i = 0; i < count; i++)
-{
-if (arr[i] != arr[j])
-{
-return (0);
-}
-j--;
-}
-return (1);
+  while (tmp != NULL)
+    {
+      values[i] = tmp->n;
+      i++;
+      tmp = tmp->next;
+    }
+
+  limit = (i % 2 == 0) ? i / 2 : (i + 1) / 2;
+
+  for (cLoop = 0; cLoop < limit; cLoop++)
+    if (values[cLoop] != values[i - 1 - cLoop])
+      return (0);
+
+  return (1);
 }

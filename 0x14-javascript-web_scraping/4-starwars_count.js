@@ -1,13 +1,12 @@
 #!/usr/bin/node
 const request = require('request');
-
-if (process.argv.length > 2) {
-  request(process.argv[2], (err, res, body) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const result = JSON.parse(body).results.filter(item => item.characters.find(id => id.match(/18/)));
-      console.log(result.length);
-    }
-  });
-}
+request(process.argv[2], function (error, response, body) {
+  if (!error) {
+    const results = JSON.parse(body).results;
+    console.log(results.reduce((count, movie) => {
+      return movie.characters.find((character) => character.endsWith('/18/'))
+        ? count + 1
+        : count;
+    }, 0));
+  }
+});

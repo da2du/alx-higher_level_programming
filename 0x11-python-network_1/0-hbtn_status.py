@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-'''task 0 script'''
+"""
+Fetches https://intranet.hbtn.io/status
+use the package urllib
+ body of the response must be displayed in tabulation before -
+"""
+import urllib.request
+with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as response:
+    html = response.read()
 
-
-if __name__ == '__main__':
-    import urllib.request
-
-    with urllib.request.urlopen('https://intranet.hbtn.io/status') as r:
-        html = r.read()
-        print('Body response:')
-        print('\t- type:', type(html))
-        print('\t- content:', html)
-        print('\t- utf8 content:', html.decode('UTF-8'))
+print('Body response:\n\t- type: {}'.format(type(html)))
+print('\t- content: {}'.format(html))
+print('\t- utf8 content: {}'.format(html.decode('utf-8')))
